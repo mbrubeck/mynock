@@ -1,22 +1,20 @@
 Mynock
 ======
 
-This is an interpreter for C. Guy Yarvin's [Nock][1] language.  (For a longer
-explanation of Yarvin's rationale for Nock, see [Urbit: functional programming
-from scratch][2].)
+This is an interpreter for C. Guy Yarvin's [Nock][1] language, written in
+Haskell.  (For a longer explanation of Yarvin's rationale for Nock, see
+[Urbit: functional programming from scratch][2].)
 
-I haven't written a parser for Nock pseudocode yet, so at the moment you'll
-need to enter Nock formulas as Haskell code.  Load the Nock module into ghci:
+For a simple Nock REPL, just load the Parser module in ghci:
 
-    ghci Nock.hs
+    ghci Parser.hs
 
-and then enter and evaluate Nock formulas at the prompt:
+and then use the "eval" function to parse and reduce Nock formulas:
 
-    > let x = (Nock (Atom 2 :- Atom 0 :- Atom 1))
-    > x
-    *[2 0 1]
-    > reduce x                                   
-    2
+    > eval "=[1 *[3 1 1]]"
+    0
+    > eval "*[[4 5 6] 0 3]"
+    [5 6]
 
 That's it!  Enjoy.
 

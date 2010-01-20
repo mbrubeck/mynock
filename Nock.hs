@@ -1,3 +1,5 @@
+module Nock (Formula(..), show, reduce) where
+
 -- 1 Context
 
 --  This spec defines one function, Nock. 
