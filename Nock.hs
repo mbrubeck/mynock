@@ -59,9 +59,9 @@ reduce (Eq e) = case reduce e of
 --  /[(a + a + 1) b] => /[3 /[a b]]
 --  /a               => /a
 reduce (Slash e) = case reduce e of
-    Atom 1 :- a      -> reduce a
-    Atom 2 :- a :- b -> reduce a
-    Atom 3 :- a :- b -> reduce b
+    Atom 1 :- a      -> a
+    Atom 2 :- a :- b -> a
+    Atom 3 :- a :- b -> b
     Atom x :- b      -> if even x then reduce (Slash (Atom 2 :- Slash (a :- b)))
                                   else reduce (Slash (Atom 3 :- Slash (a :- b)))
                         where a = Atom (x `div` 2)
@@ -80,7 +80,7 @@ reduce (Slash e) = case reduce e of
 
 reduce (Nock e) = case reduce e of
     a :- Atom 0 :- b   -> reduce (Slash (b :- a))
-    a :- Atom 1 :- b   -> reduce b
+    a :- Atom 1 :- b   -> b
     a :- Atom 2 :- b :- c :- d
                        -> reduce (Nock (a :- Atom 3 :- (Atom 0 :- Atom 1)
                                         :- Atom 3 :- (Atom 1 :- c :- d)
