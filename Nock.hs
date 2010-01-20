@@ -93,4 +93,5 @@ reduce (Nock e) = case reduce e of
     a :- (b :- c) :- d -> reduce (Nock (a :- b :- c) :- Nock (a :- d))
     a                  -> Nock a
 
-reduce a = a
+reduce (a :- b) = reduce a :- reduce b
+reduce a        = a
