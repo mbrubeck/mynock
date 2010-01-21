@@ -10,7 +10,7 @@ module Nock (Formula(..), show, reduce) where
 --  An atom is any unsigned integer.  
 --  A cell is an ordered pair of any two nouns.
 
-data Formula = Atom Integer | Formula :- Formula
+data Formula = Atom Integer | Formula :- Formula | Var String
           | What Formula | S Formula | Eq Formula | Slash Formula | Nock Formula
 
 infixr :- -- Infix notation for cells, like (:) for lists.
@@ -28,6 +28,7 @@ instance Show Formula where
     show (Eq a)     = "=" ++ show a
     show (Slash a)  = "/" ++ show a
     show (Nock a)   = "*" ++ show a
+    show (Var s)    = s
 
 -- 4 Reductions
 

@@ -10,9 +10,11 @@ eval x = case parse formula "" x of
               Left err -> error "Invalid formula."
 
 formula :: Parser Formula
-formula = atom <|> cell <|> expr
+formula = atom <|> cell <|> expr <|> var
 
 atom = integer >>= return . Atom
+
+var = identifier >>= return . Var
 
 cell = brackets (many1 formula) >>= return . foldr1 (:-)
 
@@ -35,4 +37,5 @@ lexer      = T.makeTokenParser haskellStyle
 lexeme     = T.lexeme lexer
 integer    = T.integer lexer
 brackets   = T.brackets lexer
+identifier = T.identifier lexer
 whiteSpace = T.whiteSpace lexer
