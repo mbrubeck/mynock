@@ -83,11 +83,11 @@ reduce (Nock e) = case reduce e of
     a :- Atom 1 :- b   -> b
     a :- Atom 2 :- b :- c :- d
                        -> reduce (Nock (a :- Atom 3 :- (Atom 0 :- Atom 1)
-                                        :- Atom 3 :- (Atom 1 :- c :- d)
-                                        :- (Atom 1 :- Atom 0) :- Atom 3
-                                        :- (Atom 1 :- Atom 2 :- Atom 3)
-                                        :- (Atom 1 :- Atom 0)
-                                        :- Atom 5 :- Atom 5 :- b))
+                                          :- Atom 3 :- (Atom 1 :- c :- d)
+                                          :- (Atom 1 :- Atom 0) :- Atom 3
+                                          :- (Atom 1 :- Atom 2 :- Atom 3)
+                                          :- (Atom 1 :- Atom 0)
+                                          :- Atom 5 :- Atom 5 :- b))
     a :- Atom 3 :- b   -> reduce (Nock (Nock (a :- b)))
     a :- Atom 4 :- b   -> reduce (What (Nock (a :- b)))
     a :- Atom 5 :- b   -> reduce (S    (Nock (a :- b)))
