@@ -62,7 +62,8 @@ reduce (Slash e) = case reduce e of
     Atom 1 :- a      -> a
     Atom 2 :- a :- b -> a
     Atom 3 :- a :- b -> b
-    Atom x :- b      -> if even x then reduce (Slash (Atom 2 :- Slash (a :- b)))
+    Atom x :- b      -> if x <= 3 then Slash (Atom x :- b) else
+                        if even x then reduce (Slash (Atom 2 :- Slash (a :- b)))
                                   else reduce (Slash (Atom 3 :- Slash (a :- b)))
                         where a = Atom (x `div` 2)
     a                -> Slash a
